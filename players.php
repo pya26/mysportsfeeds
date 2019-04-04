@@ -4,10 +4,10 @@
 $ch = curl_init();
 
 // Set url
-curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json?player=11249,10303");
+curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json?rosterstatus=assigned-to-roster,assigned-to-injury-list&position=C,1B,2B,3B,SS,LF,CF,RF");
 //?player=mookie-betts-10303
 //?position=C,1B,2B,3B,SS,LF,CF,RF
-//?player=11249,10277,11487,11099,10334,11249,12067,11671
+//?player=11249,10277,11487,11099,10334,11249,12067,11671,trea-turner
 
 // Set method
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -30,11 +30,11 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 // Send the request & save response to $resp
 $resp = curl_exec($ch);
 $response = json_decode($resp);
-
+/*
 print"<pre>";
 print_r($response);
 print"</pre>";
-
+*/
 /*
 if (!$resp) {
 	die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
@@ -131,20 +131,20 @@ foreach($response->players as $key => $value) {
         $data .= "Current Team ID : ".$value->player->currentTeam->id . "<br />";  
     }
     //$data .="Current Team Abbreviation : ".$value->player->currentTeam->abbreviation . "<br />";
-    //$data .= "Current Roster Status : ".$value->player->currentRosterStatus . "<br />";
+    $data .= "Current Roster Status : ".$value->player->currentRosterStatus . "<br />";
     //$data .= "Current Injury : ".$value->player->currentInjury . "<br />";
-    //$data .= "Height : ".$value->player->height . "<br />";
-    //$data .= "Weight : ".$value->player->weight . "<br />";
-    //$data .= "Birth Date : ".$value->player->birthDate . "<br />";
-    //$data .= "Age : ".$value->player->age . "<br />";
-    //$data .= "Birth City : ".$value->player->birthCity . "<br />";
-    //$data .= "Birth Country : ".$value->player->birthCountry . "<br />";
-    //$data .= "Rookie : ".$value->player->rookie . "<br />";
-    //$data .= "High School : ".$value->player->highSchool . "<br />";
-    //$data .= "College : ".$value->player->college . "<br />";
+    $data .= "Height : ".$value->player->height . "<br />";
+    $data .= "Weight : ".$value->player->weight . "<br />";
+    $data .= "Birth Date : ".$value->player->birthDate . "<br />";
+    $data .= "Age : ".$value->player->age . "<br />";
+    $data .= "Birth City : ".$value->player->birthCity . "<br />";
+    $data .= "Birth Country : ".$value->player->birthCountry . "<br />";
+    $data .= "Rookie : ".$value->player->rookie . "<br />";
+    $data .= "High School : ".$value->player->highSchool . "<br />";
+    $data .= "College : ".$value->player->college . "<br />";
     $data .= "Bats : ".$value->player->handedness->bats . "<br />";
     $data .= "Throws : ".$value->player->handedness->throws . "<br />";
-    //$data .= "<img src=".$value->player->officialImageSrc . "><br />";
+    $data .= "<img src=".$value->player->officialImageSrc . "><br />";
     //$data .= "Social Media Accounts : ".$value->player->socialMediaAccounts[0]->mediaType . " -- " . $value->player->socialMediaAccounts[0]->value . "<br />";
     //$data .= "Contract Year : ".$value->player->currentContractYear . "<br />";
     //$data .= "Year Drafted : ".$value->player->drafted->year . "<br />";
@@ -152,7 +152,10 @@ foreach($response->players as $key => $value) {
     //$data .= "Draft Round : ".$value->player->drafted->round . "<br />";
     //$data .= "Round Pick : ".$value->player->drafted->roundPick . "<br />";
     //$data .= "Overall Pick : ".$value->player->drafted->overallPick . "<br />";
-    //$data .= "MLB.org ID: ".$value->player->externalMappings[0]->id . "<br />";
+    foreach($value->player->externalMappings as $key2 => $value2){
+        $data .= "MLB.org ID: ".$value2->id . "<br />";
+    }
+    
     //$data .= "Team as of today : ".$response->players[0]->teamAsOfDate->abbreviation;
 
     print $data . "<br /><br />";
