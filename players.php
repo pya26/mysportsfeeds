@@ -4,7 +4,7 @@
 $ch = curl_init();
 
 // Set url
-curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json?rosterstatus=assigned-to-roster,assigned-to-injury-list&position=C,1B,2B,3B,SS,LF,CF,RF");
+curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json?player=jd-martinez");
 //rosterstatus=assigned-to-roster,assigned-to-injury-list&position=C,1B,2B,3B,SS,LF,CF,RF
 //?player=mookie-betts-10303
 //?position=C,1B,2B,3B,SS,LF,CF,RF
