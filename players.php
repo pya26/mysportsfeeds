@@ -5,6 +5,7 @@ $ch = curl_init();
 
 // Set url
 curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json?rosterstatus=assigned-to-roster,assigned-to-injury-list&position=C,1B,2B,3B,SS,LF,CF,RF");
+//rosterstatus=assigned-to-roster,assigned-to-injury-list&position=C,1B,2B,3B,SS,LF,CF,RF
 //?player=mookie-betts-10303
 //?position=C,1B,2B,3B,SS,LF,CF,RF
 //?player=11249,10277,11487,11099,10334,11249,12067,11671,trea-turner
@@ -121,10 +122,10 @@ print "Team as of today : ".$response->players[0]->teamAsOfDate->abbreviation;
 foreach($response->players as $key => $value) {
 
   //if($value->player->primaryPosition != 'P'){
-    $data = $key . "<br />";
-    $data .= $value->player->id . "<br />";
-    $data .= $value->player->firstName . "<br />";
-    $data .= $value->player->lastName . "<br />";
+    $data = "Foreach loop key : ".$key . "<br />";
+    $data .= "Player ID : ".$value->player->id . "<br />";
+    $data .= "First Name : ".$value->player->firstName . "<br />";
+    $data .= "Last Name : ".$value->player->lastName . "<br />";
     $data .= "Primary Position : ".$value->player->primaryPosition . "<br />";
     $data .= "Jersey Number : ".$value->player->jerseyNumber . "<br />";
     if(isset($value->player->currentTeam->id)){
