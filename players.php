@@ -4,7 +4,7 @@
 $ch = curl_init();
 
 // Set url
-curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json");
+curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json?player=11249,10303");
 //?player=mookie-betts-10303
 //?position=C,1B,2B,3B,SS,LF,CF,RF
 //?player=11249,10277,11487,11099,10334,11249,12067,11671
@@ -31,6 +31,10 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $resp = curl_exec($ch);
 $response = json_decode($resp);
 
+print"<pre>";
+print_r($response);
+print"</pre>";
+
 /*
 if (!$resp) {
 	die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
@@ -38,12 +42,8 @@ if (!$resp) {
 	echo "Response HTTP Status Code : " . curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	echo "\nResponse HTTP Body : " . $resp;
 }
+*/
 
-
-print"<pre>";
-print_r($response);
-print"</pre>";*/
-/**/
 /*
 print"<pre>";
 print_r(curl_getinfo($ch));
@@ -127,7 +127,9 @@ foreach($response->players as $key => $value) {
     $data .= $value->player->lastName . "<br />";
     $data .= "Primary Position : ".$value->player->primaryPosition . "<br />";
     $data .= "Jersey Number : ".$value->player->jerseyNumber . "<br />";
-    //$data .= "Current Team ID : ".$value->player->currentTeam->id . "<br />";
+    if(isset($value->player->currentTeam->id)){
+        $data .= "Current Team ID : ".$value->player->currentTeam->id . "<br />";  
+    }
     //$data .="Current Team Abbreviation : ".$value->player->currentTeam->abbreviation . "<br />";
     //$data .= "Current Roster Status : ".$value->player->currentRosterStatus . "<br />";
     //$data .= "Current Injury : ".$value->player->currentInjury . "<br />";
@@ -140,8 +142,8 @@ foreach($response->players as $key => $value) {
     //$data .= "Rookie : ".$value->player->rookie . "<br />";
     //$data .= "High School : ".$value->player->highSchool . "<br />";
     //$data .= "College : ".$value->player->college . "<br />";
-    //$data .= "Bats : ".$value->player->handedness->bats . "<br />";
-    //$data .= "Throws : ".$value->player->handedness->throws . "<br />";
+    $data .= "Bats : ".$value->player->handedness->bats . "<br />";
+    $data .= "Throws : ".$value->player->handedness->throws . "<br />";
     //$data .= "<img src=".$value->player->officialImageSrc . "><br />";
     //$data .= "Social Media Accounts : ".$value->player->socialMediaAccounts[0]->mediaType . " -- " . $value->player->socialMediaAccounts[0]->value . "<br />";
     //$data .= "Contract Year : ".$value->player->currentContractYear . "<br />";
