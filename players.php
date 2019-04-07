@@ -4,7 +4,7 @@
 $ch = curl_init();
 
 // Set url
-curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json?rosterstatus=assigned-to-roster,assigned-to-injury-list&position=C,1B,2B,3B,SS,LF,CF,RF");
+curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/players.json?player=10303");
 //rosterstatus=assigned-to-roster,assigned-to-injury-list&position=C,1B,2B,3B,SS,LF,CF,RF
 //?player=mookie-betts-10303
 //?position=C,1B,2B,3B,SS,LF,CF,RF
@@ -145,7 +145,11 @@ foreach($response->players as $key => $value) {
     $data .= "College : ".$value->player->college . "<br />";
     $data .= "Bats : ".$value->player->handedness->bats . "<br />";
     $data .= "Throws : ".$value->player->handedness->throws . "<br />";
-    $data .= "<img src=".$value->player->officialImageSrc . "><br />";
+    //$data .= "<img src=".$value->player->officialImageSrc . "><br />";
+    $data .= $value->player->officialImageSrc . "<br />";
+
+    $pieces = explode('/', $value->player->officialImageSrc);
+
     //$data .= "Social Media Accounts : ".$value->player->socialMediaAccounts[0]->mediaType . " -- " . $value->player->socialMediaAccounts[0]->value . "<br />";
     //$data .= "Contract Year : ".$value->player->currentContractYear . "<br />";
     //$data .= "Year Drafted : ".$value->player->drafted->year . "<br />";
