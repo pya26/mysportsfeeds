@@ -69,6 +69,9 @@
 		$last_name = $value->player->lastName;
 		$position = $value->player->primaryPosition;
 		$jersey_num = $value->player->jerseyNumber;
+
+		//print $player_id .' - '. $first_name  .' '. $last_name  .' - '. $position . "</br>";
+
 		if(isset($value->player->currentTeam->id)){
 	        $team_id = $value->player->currentTeam->id;  
 	    } else {

@@ -4,7 +4,7 @@
 $ch = curl_init();
 
 // Set url
-curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/2019-regular/player_stats_totals.json?team=bos&date=20190417");
+curl_setopt($ch, CURLOPT_URL, 'https://api.mysportsfeeds.com/v2.1/pull/mlb/2019-regular/date/20190417/player_gamelogs.json');//?player=jd-martinez-10474
 
 // Set method
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -34,9 +34,23 @@ if (!$resp) {
 	echo "\nResponse HTTP Body : " . $resp;
 }
 */
+
+/*
 print"<pre>";
-print_r($response);
+print_r($response->gamelogs[0]);//->stats->batting->homeruns
 print"</pre>";
+*/
+
+
+
+foreach($response->gamelogs as $key => $value) { 
+	$id =  $value->player->id;
+	$firstName =  $value->player->firstName;
+	$lastName =  $value->player->lastName;
+	$homeruns = $value->stats->batting->homeruns;
+	print $id . " - " . $firstName ." ". $lastName  . " - " . $homeruns . "</br>";
+}
+
 
 // Close request to clear up some resources
 curl_close($ch);
