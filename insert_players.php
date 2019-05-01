@@ -104,7 +104,22 @@
 
 		foreach($value->player->externalMappings as $key2 => $value2){
 	        $mlbid = $value2->id;
-	    }		
+	    }	
+
+
+	    /*populate HR tables to update later
+
+	    INSERT INTO `hrs_march` (player_id) SELECT PlayerID from `Players`
+	    INSERT INTO `hrs_april` (player_id) SELECT PlayerID from `Players`
+		INSERT INTO `hrs_may` (player_id) SELECT PlayerID from `Players`
+		INSERT INTO `hrs_june` (player_id) SELECT PlayerID from `Players`
+		INSERT INTO `hrs_july` (player_id) SELECT PlayerID from `Players
+		INSERT INTO `hrs_august` (player_id) SELECT PlayerID from `Players`
+		INSERT INTO `hrs_september` (player_id) SELECT PlayerID from `Players`
+		INSERT INTO `hrs_october` (player_id) SELECT PlayerID from `Players`
+		INSERT INTO `hrs_november` (player_id) SELECT PlayerID from `Players`
+
+	    */	
 
 		$stmt->execute();
 

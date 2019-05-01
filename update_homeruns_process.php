@@ -5,41 +5,43 @@
   $day_string = $_POST["days"];
   $column_name = "day" . ltrim($day_string, '0');
 
+  
+
   switch ($month_string) {
-    case 01:
+    case '01':
         $table_string = 'hrs_january';
         break;
-    case 02:
+    case '02':
         $table_string = 'hrs_february';
         break;
-    case 03:
+    case '03':
         $table_string = 'hrs_march';
         break;
-    case 04:
+    case '04':
         $table_string = 'hrs_april';
         break;
-    case 05:
+    case '05':
         $table_string = 'hrs_may';
         break;
-    case 06:
+    case '06':
         $table_string = 'hrs_june';
         break;
-    case 07:
+    case '07':
         $table_string = 'hrs_july';
         break;
-    case 08:
+    case '08':
         $table_string = 'hrs_august';
         break;
-    case 09:
+    case '09':
         $table_string = 'hrs_september';
         break;
-    case 10:
+    case '10':
           $table_string = 'hrs_october';
           break;
-    case 11:
+    case '11':
         $table_string = 'hrs_november';
         break;
-    case 12:
+    case '12':
         $table_string = 'hrs_december';
         break;
 }
@@ -81,6 +83,7 @@
   $resp = curl_exec($ch);
   $response = json_decode($resp);
 
+
   foreach($response->gamelogs as $key => $value) {
     $id =  $value->player->id;
     $firstName =  $value->player->firstName;
@@ -91,17 +94,21 @@
     $stmt = $dbh->prepare("UPDATE " . $table_string . " SET " . $column_name  . " = " .$homeruns ." WHERE player_id = ". $id ."");
     $stmt->execute();
 
-
-  $result = $dbh->prepare('CALL update_april_hr_totals(@p0)');
-  $result->bindParam(@p0, $id, PDO::PARAM_INT, 11);
-  $result->execute();
-
+    /*
+    $stmt = $dbh->prepare("CALL update_april_homeruns(?)");
+    $stmt->bindParam(1, $id, PDO::PARAM_INT, 11);
+    $stmt->execute();*/
   }
+  
 
 
 
   // Close request to clear up some resources
   curl_close($ch);
+
+
+ header('Location: update_homeruns.php'); /* Redirect browser */
+exit();
 
 
 
