@@ -10,39 +10,51 @@
   switch ($month_string) {
     case '01':
         $table_string = 'hrs_january';
+        $hr_totals_stored_proc = 'update_january_homerun_totals';
         break;
     case '02':
         $table_string = 'hrs_february';
+        $hr_totals_stored_proc = 'update_february_homerun_totals';
         break;
     case '03':
         $table_string = 'hrs_march';
+        $hr_totals_stored_proc = 'update_march_homerun_totals';
         break;
     case '04':
         $table_string = 'hrs_april';
+        $hr_totals_stored_proc = 'update_april_homerun_totals';
         break;
     case '05':
         $table_string = 'hrs_may';
+        $hr_totals_stored_proc = 'update_may_homerun_totals';
         break;
     case '06':
         $table_string = 'hrs_june';
+        $hr_totals_stored_proc = 'update_june_homerun_totals';
         break;
     case '07':
         $table_string = 'hrs_july';
+        $hr_totals_stored_proc = 'update_july_homerun_totals';
         break;
     case '08':
         $table_string = 'hrs_august';
+        $hr_totals_stored_proc = 'update_august_homerun_totals';
         break;
     case '09':
         $table_string = 'hrs_september';
+        $hr_totals_stored_proc = 'update_september_homerun_totals';
         break;
     case '10':
           $table_string = 'hrs_october';
+          $hr_totals_stored_proc = 'update_october_homerun_totals';
           break;
     case '11':
         $table_string = 'hrs_november';
+        $hr_totals_stored_proc = 'update_november_homerun_totals';
         break;
     case '12':
         $table_string = 'hrs_december';
+        $hr_totals_stored_proc = 'update_december_homerun_totals';
         break;
 }
 
@@ -94,10 +106,9 @@
     $stmt = $dbh->prepare("UPDATE " . $table_string . " SET " . $column_name  . " = " .$homeruns ." WHERE player_id = ". $id ."");
     $stmt->execute();
 
-    /*
-    $stmt = $dbh->prepare("CALL update_april_homeruns(?)");
+    $stmt = $dbh->prepare("CALL ". $hr_totals_stored_proc . "(?)");
     $stmt->bindParam(1, $id, PDO::PARAM_INT, 11);
-    $stmt->execute();*/
+    $stmt->execute();
   }
   
 
@@ -107,9 +118,8 @@
   curl_close($ch);
 
 
- header('Location: update_homeruns.php'); /* Redirect browser */
+ header('Location: update_homeruns.php?month='.$_POST["months"].'&day='.$_POST["days"].'&year='.$_POST["years"]); /* Redirect browser */
 exit();
-
 
 
 ?>

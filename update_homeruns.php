@@ -1,4 +1,15 @@
-
+<?php
+print_r($_SERVER['QUERY_STRING']);
+print "<br />";
+print $_GET['month'];
+print "<br />";
+print $_GET['day'];
+print "<br />";
+print $_GET['year'];
+?>
+<!--
+<option value="January"<?=$row['month'] == 'January' ? ' selected="selected"' : '';?>>January</option>
+-->
 <form action="update_homeruns_process.php" method="post">
 
   <select name="months">
@@ -9,8 +20,8 @@
           }*/
           foreach ($months as $key => $val) {
               //print $key . " => " . $val . "</br>";
-              print '<option value="'.$key.'">'.$val.'</option>';
-          }
+              print '<option value="'.$key.'">'.$val.'</option>';              
+          } 
       ?>
   </select>
 
