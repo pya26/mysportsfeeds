@@ -1,0 +1,20 @@
+Remote Repository: https://github.com/pya26/mysportsfeeds.git
+
+GitHub URL to repo: https://github.com/pya26/mysportsfeeds
+
+
+
+
+Stages all changes for commit
+===========================================
+git add -A
+
+
+Commit all staged changes
+===========================================
+get commit -m "add comments here"
+
+
+Push committed changed to remote repository (https://help.github.com/en/articles/pushing-commits-to-a-remote-repository)
+===========================================
+git push origin master
