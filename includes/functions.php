@@ -34,6 +34,31 @@
 	}
 
 
+
+	function api_param_select() {
+		/*var value = $('#globalstyleselect').val();
+		var div = $("#stylediv");
+		if (value == "3") {
+			div.html('<b>Boca Style</b>');
+		}
+		if (value == "2") {
+			div.html('<b>Bella Style</b>');
+		}
+		if (value == "1") {
+			div.html('<b>Terra Style</b>');
+		}*/
+		try {
+			require "../config_files/_db_connect_string.php";
+		} catch (PDOException $e) {
+			echo 'Connection failed: ' . $e->getMessage();
+			die();
+		}
+
+
+
+	}
+
+
 ?>
 
 
