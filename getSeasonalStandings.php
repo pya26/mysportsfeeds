@@ -4,7 +4,7 @@
 $ch = curl_init();
 
 // Set url
-curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v1.0/pull/mlb/2019-regular/daily_player_stats.json?fordate=20190915&playerstats=HR&limit=1");//&player=kyle-schwarber
+curl_setopt($ch, CURLOPT_URL, 'https://api.mysportsfeeds.com/v2.1/pull/mlb/2019-regular/standings.json');
 
 // Set method
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -17,14 +17,29 @@ curl_setopt($ch, CURLOPT_ENCODING, "gzip");
 
 // Set headers
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-	"Authorization: Basic " . base64_encode("3e610f3c-19bb-400c-b0b6-887575" . ":" . "AaronNolan26")
+	"Authorization: Basic " . base64_encode("3e610f3c-19bb-400c-b0b6-887575" . ":" . "MYSPORTSFEEDS")
 ]);
 
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 // Send the request & save response to $resp
 $resp = curl_exec($ch);
+
 $response = json_decode($resp);
+
+print"<pre>";
+print_r($response);
+print"</pre>";
+
+/*
+foreach($response->teams as $key => $value) {
+	print "<pre>";
+	print_r($value->team->id);
+	print "</pre>";
+}
+*/
+
+
 
 /*
 if (!$resp) {
@@ -34,22 +49,6 @@ if (!$resp) {
 	echo "\nResponse HTTP Body : " . $resp;
 }
 */
-/*foreach($response->dailyplayerstats->playerstatsentry as $key => $value) {
- $player_id = $value->player->ID;
- print 'Player ID'. $player_id . '<br />';
- print 'HR\'s' . $value->stats->Homeruns->{'#text'} .'<br /><br />';
-}*/
-
-print"<pre>";
-print_r($response->dailyplayerstats->playerstatsentry);
-print"</pre>";
-
-
-/*
-foreach($response->players as $key => $value) {
- $player_id = $value->player->ID;
- $homeruns = $value->stats->Homeruns->#text
-}*/
 
 // Close request to clear up some resources
 curl_close($ch);

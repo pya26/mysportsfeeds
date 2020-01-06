@@ -1,15 +1,12 @@
 <?php
-	/**
-	 * Include file for msf api token
-	 */
-	/*
+
 	try {
-			require '../config_files/_config.php';
+			require '../config_files/_header.php';
 		} catch (PDOException $e) {
 			echo 'Connection failed: ' . $e->getMessage();
 			die();
 		}
-	*/
+	
 	/**
 	 * Include file for db connection string
 	 */
@@ -27,7 +24,7 @@
 			die();
 		}
 
-
+/*
 print $_SERVER['REQUEST_METHOD'];
 print "<br />";
 print_r($_POST);
@@ -37,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
 	print "<br />";
 	print_r($_POST);
 }
+*/
 		
 
 	/**
@@ -55,14 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
 	/**
 	 * display select menu of msf api names
 	 */
-	$api_form = '<form id="api_params_select" action="'.$_SERVER['PHP_SELF'].'" method="POST">';
-	$api_form .= dynamic_select($api_array, 'api_menu', 'API Names:', '');
-	$api_form .= '<input type="submit" onSubmit="styleselect()">';
-	$api_form .= '</form>';
+	//$api_form = '<form id="api_params_select" action="'.$_SERVER['PHP_SELF'].'" method="POST">';
+	$api_form = dynamic_select($api_array, 'api_menu', 'API Names:', '');
+	/*$api_form .= '<input type="submit">';*/
+	//$api_form .= '</form>';
 
 	print $api_form;
 
 
+	print '<div class="result"></div>';
+
+	/*
 	$result = $dbh->query("SELECT * FROM msf_api_params");
 	$result->execute();
 	$api_param_array = [];
@@ -72,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
 
 		echo "<input type='checkbox' value='{$row['api_param_id']}'>" . $row['api_param_name'] . " - " .$row['api_param_filter']. '</br>';
 	}
+	*/
 
 	
 /*
@@ -79,6 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
 	print_r($api_param_array);
 	print "</pre>";
 	*/
+
+	/*
 $arr=array('a','b','c','d','e','f','g','h');
 print_r(array_chunk($arr,2));
 print "<br />";
@@ -96,13 +100,20 @@ while($slice = array_slice($arr,$offset,$num_columns)){
 }
 $table_html .= '</table>';
 echo $table_html;
+*/
 
 
 
-
+try {
+			require '../config_files/_footer.php';
+		} catch (PDOException $e) {
+			echo 'Connection failed: ' . $e->getMessage();
+			die();
+		}	
 
 	
 	
 
 
 ?>
+

@@ -4,8 +4,7 @@
 $ch = curl_init();
 
 // Set url
-curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v1.0/pull/mlb/2019-regular/daily_player_stats.json?fordate=20190915&playerstats=HR&limit=1");//&player=kyle-schwarber
-
+curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v1.0/pull/mlb/2019-regular/cumulative_player_stats.json?limit=1");
 // Set method
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
@@ -32,8 +31,8 @@ if (!$resp) {
 } else {
 	echo "Response HTTP Status Code : " . curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	echo "\nResponse HTTP Body : " . $resp;
-}
-*/
+}*/
+
 /*foreach($response->dailyplayerstats->playerstatsentry as $key => $value) {
  $player_id = $value->player->ID;
  print 'Player ID'. $player_id . '<br />';
@@ -41,7 +40,7 @@ if (!$resp) {
 }*/
 
 print"<pre>";
-print_r($response->dailyplayerstats->playerstatsentry);
+print_r($response);
 print"</pre>";
 
 

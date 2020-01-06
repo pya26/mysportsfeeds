@@ -4,7 +4,8 @@
 $ch = curl_init();
 
 // Set url
-curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v1.0/pull/mlb/2019-regular/player_injuries.json");
+//curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v1.0/pull/mlb/2019-regular/player_injuries.json");
+curl_setopt($ch, CURLOPT_URL, "https://api.mysportsfeeds.com/v2.1/pull/mlb/injuries.json");
 
 // Set method
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -17,15 +18,22 @@ curl_setopt($ch, CURLOPT_ENCODING, "gzip");
 
 // Set headers
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-	"Authorization: Basic " . base64_encode("3e610f3c-19bb-400c-b0b6-887575" . ":" . "AaronNolan26")
+	"Authorization: Basic " . base64_encode("3e610f3c-19bb-400c-b0b6-887575" . ":" . "MYSPORTSFEEDS")//AaronNolan26
 ]);
 
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+
+
 
 // Send the request & save response to $resp
 $resp = curl_exec($ch);
 
 $response = json_decode($resp);
+
+print"<pre>";
+print_r($response);
+print"</pre>";
 
 /*
 if (!$resp) {
@@ -35,11 +43,9 @@ if (!$resp) {
 	echo "\nResponse HTTP Body : " . $resp;
 }
 */
-print"<pre>";
-print_r($response);
-print"</pre>";
 
 // Close request to clear up some resources
 curl_close($ch);
+
 
 ?>
